@@ -1,9 +1,9 @@
 # dynamic_lambda_hfe
 
 A from-scratch **OpenMM** toolkit for alchemical free energies with a **dynamic-λ
-(d-AFED)** sampler: one master coordinate τ drives the alchemical change as an
+Adiabatic Free Energy Dynamics (AFED)** sampler: one master coordinate  drives the alchemical change as an
 adiabatic, high-temperature extended variable, and the free energy is recovered by
-reweighting the τ histogram. Runs on CUDA, OpenCL (Apple Silicon), or CPU.
+reweighting the lambda histogram. Runs on CUDA, OpenCL (Apple Silicon), or CPU.
 
 **Capabilities**
 - **Absolute hydration free energy (HFE)** — decouple a solute from TIP3P water;
@@ -65,9 +65,17 @@ tests/           pytest suite  (pytest -q;  add -m "not slow" to skip MD)
 - **Force field:** protein Amber **ff14SB**, ligands **OpenFF 2.x** + AM1-BCC,
   **TIP3P** water, PME.
 
-## Data & references
+## References
 
-Benchmark inputs are downloaded by `RBFE_Example/data/prepare_targets.py` from the
+Method (AFED / adiabatic free energy dynamics):
+
+1. L. Rosso and M. E. Tuckerman, *An Adiabatic Molecular Dynamics Method for the
+   Calculation of Free Energy Profiles*, **Mol. Simul.** 2002, 28, 91–112.
+   [`10.1080/08927020211977`](https://doi.org/10.1080/08927020211977)
+2. J. B. Abrams, L. Rosso, and M. E. Tuckerman, *Efficient and precise solvation
+   free energies via alchemical adiabatic molecular dynamics*, **J. Chem. Phys.**
+   2006, 125, 074115. [`10.1063/1.2232082`](https://doi.org/10.1063/1.2232082)
+
+Benchmark data: downloaded by `RBFE_Example/data/prepare_targets.py` from the
 [OpenFE benchmarks](https://github.com/OpenFreeEnergy/openfe-benchmarks) (FEP+ JACS
-set; Wang et al. *JACS* 2015, `10.1021/ja512751q`). The SIN(R) integrator follows
-Abreu & Tuckerman (*Eur. Phys. J. B* 2021, 94, 231).
+set; Wang et al. *JACS* 2015, [`10.1021/ja512751q`](https://doi.org/10.1021/ja512751q)).
