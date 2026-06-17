@@ -1,0 +1,17 @@
+# Relative hydration toluene -> ethylbenzene (ddG_hyd ref = +0.11 kcal/mol).
+# SHORT local smoke settings -- NOT converged.
+name: rel_hyd_toluene_to_ethylbenzene
+mode: from_absolute
+ligand_a: {name: toluene, smiles: "Cc1ccccc1"}
+ligand_b: {name: ethylbenzene, smiles: "CCc1ccccc1"}
+reference: {kind: relative_hydration, ligand_a: toluene, ligand_b: ethylbenzene}
+n_elec_windows: 6
+n_steric_windows: 12
+equil_steps: 2500
+prod_steps: 10000
+sample_interval: 500
+temperature: 298.15
+padding_nm: 1.0
+prefer_gpu: true
+seed: 12345
+smoke_test: true

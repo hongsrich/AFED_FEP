@@ -1,0 +1,24 @@
+# conda env for dynamic_lambda_hfe
+#   conda env create -f environment.yml   &&   conda activate openmm_dynlambda
+# Tested on macOS/Apple-Silicon (OpenCL) with: openmm 8.5, openff-toolkit 0.18,
+# openmmforcefields 0.16, rdkit 2025.9, pymbar 4.2, pdbfixer 1.12, python 3.11.
+name: openmm_dynlambda
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - openmm>=8.1            # MD engine (CUDA/OpenCL/CPU)
+  - openmmtools            # alchemy + integrators
+  - openmmforcefields      # SMIRNOFF/GAFF template generators
+  - openff-toolkit         # small-molecule parametrization (OpenFF 2.x)
+  - pdbfixer               # protein prep for the RBFE complex leg
+  - rdkit                  # molecule handling / MCS atom mapping
+  - pymbar>=4              # MBAR free-energy estimator
+  - mdtraj                 # trajectory I/O
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib             # plots (lambda-vs-time, etc.)
+  - pyyaml                 # configs / benchmark edge maps
+  - tqdm
+  - pytest                 # test suite

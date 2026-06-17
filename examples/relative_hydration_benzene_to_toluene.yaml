@@ -1,0 +1,17 @@
+# Relative hydration benzene -> toluene (ddG_hyd ref = 0.00 kcal/mol).
+# SHORT local smoke settings -- NOT converged.
+name: rel_hyd_benzene_to_toluene
+mode: from_absolute            # from_absolute | direct
+ligand_a: {name: benzene, smiles: "c1ccccc1"}
+ligand_b: {name: toluene, smiles: "Cc1ccccc1"}
+reference: {kind: relative_hydration, ligand_a: benzene, ligand_b: toluene}
+n_elec_windows: 6
+n_steric_windows: 12
+equil_steps: 2500
+prod_steps: 10000
+sample_interval: 500
+temperature: 298.15
+padding_nm: 1.0
+prefer_gpu: true
+seed: 12345
+smoke_test: true

@@ -1,0 +1,28 @@
+# Tiny smoke-test config (NOT scientifically meaningful). Used to validate the
+# full pipeline runs end to end in well under a minute on a laptop.
+name: smoke
+smiles: "C"
+padding_nm: 1.2
+water_model: tip3p
+temperature: 298.15
+timestep_fs: 2.0
+friction_per_ps: 1.0
+n_elec_windows: 2
+n_steric_windows: 3
+equil_steps: 200
+prod_steps: 4000
+sample_interval: 200
+prefer_gpu: true
+seed: 1
+dynamic:
+  mode: combined
+  md_steps_per_block: 10
+  n_blocks: 50
+  lambda_mass: 200.0
+  lambda_friction: 5.0
+  lambda_temperature: 1000.0
+  lambda0: 0.5
+  barrier_height: 10.0
+  pmf_nbins: 12
+  reweight_drop_frac: 0.2
+  use_adaptive_bias: false

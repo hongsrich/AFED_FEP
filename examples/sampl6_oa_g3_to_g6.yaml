@@ -1,0 +1,17 @@
+# SAMPL6 octa-acid host-guest relative binding OA-G3 -> OA-G6 (ref +0.21 kcal/mol).
+# Local mode is a SMOKE TEST only (code path + sign + finite dG); NOT converged.
+name: sampl6_oa_g3_to_g6
+system: sampl6_oa
+ligand_a: OA-G3
+ligand_b: OA-G6
+reference: {kind: relative_binding, system: sampl6_oa, ligand_a: OA-G3, ligand_b: OA-G6}
+data_dir: data/sampl6            # populated by scripts/08_prepare_sampl6_oa_g3_g6.py
+mode: smoke                      # smoke | benchmark
+n_windows: 6
+equil_steps: 1000
+prod_steps: 2000
+sample_interval: 500
+temperature: 298.15
+prefer_gpu: true
+seed: 12345
+smoke_test: true

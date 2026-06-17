@@ -1,0 +1,29 @@
+# Methanol absolute hydration free energy (quick local test).
+name: methanol
+smiles: "CO"
+
+padding_nm: 1.0
+water_model: tip3p
+
+temperature: 298.15
+timestep_fs: 2.0
+friction_per_ps: 1.0
+
+n_elec_windows: 6
+n_steric_windows: 12
+
+equil_steps: 2500
+prod_steps: 10000
+sample_interval: 500
+
+prefer_gpu: true
+seed: 12345
+
+dynamic:
+  mode: staged
+  md_steps_per_block: 50
+  n_blocks: 2000
+  lambda_mass: 20.0
+  lambda_friction: 5.0
+  lambda0: 0.5
+  use_adaptive_bias: true

@@ -1,0 +1,19 @@
+# T4 lysozyme L99A relative binding toluene -> ethylbenzene (ref -0.24 kcal/mol).
+# Local mode is a SMOKE TEST only; NOT converged.
+name: t4_l99a_toluene_to_ethylbenzene
+system: t4_l99a
+ligand_a: toluene
+ligand_b: ethylbenzene
+ligand_a_smiles: "Cc1ccccc1"
+ligand_b_smiles: "CCc1ccccc1"
+reference: {kind: relative_binding, system: t4_l99a, ligand_a: toluene, ligand_b: ethylbenzene}
+data_dir: data/t4_l99a
+mode: smoke
+n_windows: 6
+equil_steps: 1000
+prod_steps: 2000
+sample_interval: 500
+temperature: 298.15
+prefer_gpu: true
+seed: 12345
+smoke_test: true

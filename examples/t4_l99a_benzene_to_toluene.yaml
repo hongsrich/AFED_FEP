@@ -1,0 +1,24 @@
+# T4 lysozyme L99A relative binding benzene -> toluene (ref -0.33 kcal/mol).
+# d-AFED single-topology, ddG_bind = dG_transform(complex) - dG_transform(solvent).
+name: t4_l99a_benzene_to_toluene
+system: t4_l99a
+ligand_a: benzene
+ligand_b: toluene
+ligand_a_smiles: "c1ccccc1"
+ligand_b_smiles: "Cc1ccccc1"
+reference: {kind: relative_binding, system: t4_l99a, ligand_a: benzene, ligand_b: toluene}
+data_dir: data/t4_l99a           # 181L auto-downloaded if absent
+ligand_resname: BNZ              # crystal ligand in 181L defining the pose
+method: dafed                    # d-AFED single-topology (or 'mbar')
+# Integrator: HMR-MTS "4/4/8" -- PME reciprocal @8 fs outer, bonded+direct+softcore
+# @4 fs inner, HMR 3 amu, rigid water. Robust + fast default for the protein complex.
+integrator: mts448
+timestep_fs: 8.0
+mts_inner_steps: 2
+hydrogen_mass_amu: 3.0
+mode: converged                  # 'smoke' for a short pipeline test
+n_blocks: 12500                  # ~1.2 ns/leg (md_steps_per_block * 8 fs * n_blocks)
+md_steps_per_block: 12
+temperature: 298.15
+prefer_gpu: true
+seed: 12345

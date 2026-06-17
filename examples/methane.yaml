@@ -1,0 +1,49 @@
+# Methane absolute hydration free energy (quick local test).
+name: methane
+smiles: "C"
+
+# System / solvation
+padding_nm: 1.0
+water_model: tip3p
+
+# Thermodynamics / integrator
+temperature: 298.15
+timestep_fs: 2.0
+friction_per_ps: 1.0
+
+# Lambda schedule (electrostatics first, then sterics)
+n_elec_windows: 6
+n_steric_windows: 12
+
+# Sampling (short -> for local prototyping, NOT converged)
+equil_steps: 2500      # ~5 ps
+prod_steps: 10000      # ~20 ps
+sample_interval: 500   # collect every ~1 ps
+
+# Platform: prefer GPU (OpenCL on Apple Silicon), else CPU
+prefer_gpu: true
+seed: 12345
+
+# Dynamic-lambda toy (used by 04_run_dynamic_lambda_toy.py)
+dynamic:
+  mode: staged          # combined | staged (staged: discharge before decouple)
+  md_steps_per_block: 50
+  n_blocks: 2000
+  lambda_mass: 200.0        # LARGE fictitious mass -> adiabatic separation
+  lambda_friction: 5.0
+  lambda_temperature: 1000.0  # T_s (= T_lambda): HIGH thermostat temp (K)
+  lambda0: 0.5
+  # Barrier potential (Eq. 3, Aho et al.): double-well + central barrier + soft
+  # erf walls. k, a, b are solved iteratively for `barrier_height` (Aho SI
+  # S1-S6); d = barrier_height/2. The erf walls confine lambda (no hard
+  # reflection). s, w, r, m, sigma0 below are the published default values.
+  barrier_height: 10.0      # kJ/mol (<0.45 -> walls only, no inter-state barrier)
+  barrier_sigma0: 0.02      # target dispersion of the well (Eq. S6)
+  barrier_s: 0.30           # central-barrier width
+  barrier_w: 1000.0         # wall height (kJ/mol)
+  barrier_r: 13.5           # wall steepness
+  barrier_m: 0.2019         # wall position offset (walls at lambda ~ -m, 1+m)
+  # Reweighting: A = -kB*T_s*ln P(lambda) - V_barrier; recover free energy.
+  pmf_nbins: 25
+  reweight_drop_frac: 0.2   # discard this leading fraction as equilibration
+  use_adaptive_bias: false  # optional extra flattening bias (reweighted at T_s)
